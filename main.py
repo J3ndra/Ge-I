@@ -63,7 +63,7 @@ async def changeprefix(ctx, prefix):
     embed = discord.Embed(color = 0xff5900, title="Prefix changed!", description=f"New prefix : `{prefix}`.")
     await ctx.send(embed=embed)
 
-#Read all command on 'commands' folder
+# Read all command on 'commands' folder
 for filename in os.listdir('./commands'):
     if filename.endswith('.py'):
         bot.load_extension(f'commands.{filename[:-3]}')

@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord
+import datetime
 
 class pingCog(commands.Cog):
     def __init__(self, bot):
@@ -15,6 +16,7 @@ class pingCog(commands.Cog):
         elif ping>301:
             embed = discord.Embed(title="Bot ping.", description=f"Bot latency to the server is `{ping} ms`", color=discord.Color.red())
         
+        embed.timestamp = datetime.datetime.utcnow()
         await ctx.send(embed=embed)
 
 def setup(bot):
