@@ -2,9 +2,7 @@ from discord.ext import commands
 import discord
 import requests
 import json
-from random import randint
 import datetime
-import asyncio
 
 class enemiesCog(commands.Cog):
     def __init__(self, bot):
@@ -65,7 +63,7 @@ class enemiesCog(commands.Cog):
             try:
                 resp = requests.get(url=url)
                 data = json.loads(resp.content)
-                embed = discord.Embed(color = discord.Color.green(), title=f"Genshin Impact enemies list.", description='\n'.join(data))
+                embed = discord.Embed(color = discord.Color.green(), title=f"Genshin Impact enemy list.", description='\n'.join(data))
                 embed.timestamp = datetime.datetime.utcnow()
                 await ctx.send(embed=embed)
 
