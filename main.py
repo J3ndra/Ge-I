@@ -20,7 +20,7 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} is now online!')
-    print('------')
+    print('-------')
     print('Joined Guild:')
     for guild in bot.guilds:
         print(f'{guild.name} - {guild.id}')
