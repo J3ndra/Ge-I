@@ -1,5 +1,7 @@
 # Ge-I Discord Bot.
 
+![Push to Heroku](https://github.com/J3ndra/Ge-I/actions/workflows/heroku.yml/badge.svg)
+
 ## _Fan-made Genshin Impact Bot for Discord._
 
 ## 🚀 How to start
