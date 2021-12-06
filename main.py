@@ -3,6 +3,9 @@ import discord
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
+from typing import Union
+from discord.ext.commands.errors import CommandNotFound, MissingRequiredArgument, CommandInvokeError
+import datetime
 
 # GET PREFIXES
 def get_prefix(bot, message):
@@ -11,7 +14,7 @@ def get_prefix(bot, message):
     return prefixes[str(message.guild.id)]
 
 bot = commands.Bot(command_prefix=get_prefix)
-bot.remove_command('help')
+bot.remove_command('help',)
 
 load_dotenv()
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -61,7 +64,17 @@ async def changeprefix(ctx, prefix):
     with open('prefixes.json', 'w') as f:
         json.dump(prefixes, f, indent=4)
     embed = discord.Embed(color = 0xff5900, title="Prefix changed!", description=f"New prefix : `{prefix}`.")
+    embed.timestamp = datetime.datetime.utcnow()
     await ctx.send(embed=embed)
+
+# Bot command error handling
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, CommandNotFound):
+        embed = discord.Embed(color = discord.Color.red(), title="Command not found!", description='Use `*help` to show what this bot can do.')
+        embed.timestamp = datetime.datetime.utcnow()
+        await ctx.send(embed=embed)
+    raise error
 
 # Read all command on 'commands' folder
 for filename in os.listdir('./commands'):
