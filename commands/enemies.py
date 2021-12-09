@@ -25,18 +25,19 @@ class enemiesCog(commands.Cog):
                 embed.add_field(name="Type", value=f"{data.get('type', 'Could not get type.')}", inline=False)
                 embed.add_field(name="Family", value=f"{data.get('family', 'Could not get family.')}", inline=False)
                 embed.add_field(name="Faction", value=f"{data.get('faction', 'Could not get faction.')}", inline=False)
-                elements = ', '.join(data.get('elements', ''))
-                embed.add_field(name="Elements", value=elements, inline=False)
+                if(len(data['elements'])) > 0:
+                    elements = ', '.join(data.get('elements', '0'))
+                    embed.add_field(name="Elements", value=elements, inline=False)
 
                 if (len(data.get('drops', '')) > 0):
                     drops = data.get('drops')
-                    embed.add_field(name="Drops", value=f'\n'.join(repr(i) for i in drops), inline=False)
+                    embed.add_field(name="Drops.", value=f"\n".join(f"{drop['name']} | {drop['rarity']}⭐ | Minimum level {drop['minimum-level']}" for drop in drops), inline=False)
                 else:
                     pass
 
                 if (len(data.get('artifacts', '')) > 0):
                     artifacts = data.get('artifacts')
-                    embed.add_field(name="Artifacts", value=f'\n'.join(repr(i) for i in artifacts), inline=False)
+                    embed.add_field(name="Drops.", value=f"\n".join(f"{artifact['name']} ({artifact['set']}) | {artifact['rarity']}⭐" for artifact in artifacts), inline=False)
                 else:
                     pass
 
